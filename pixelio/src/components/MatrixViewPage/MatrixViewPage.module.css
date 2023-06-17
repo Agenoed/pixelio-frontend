@@ -1,0 +1,15 @@
+.matrixContainer {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+}
+
+.matrixRow {
+  display: flex;
+}
+
+.matrixPixel {
+  width: 25px;
+  height: 25px;
+  border: 1px solid white;
+}

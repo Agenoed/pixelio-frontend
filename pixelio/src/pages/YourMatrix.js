@@ -1,12 +1,12 @@
 import { Helmet } from "react-helmet";
-import { MatrixViewPage } from "../components/MatrixViewPage/MatrixViewPage";
+import { LEDMatrixPage } from "../components/MatrixList/MatrixList";
 export default function MatrixPage() {
   return (
     <div>
       <Helmet>
-        <title>Matrix Edit</title>
+        <title>Your Matrices</title>
       </Helmet>
-      <MatrixViewPage />
+      <LEDMatrixPage />
     </div>
   );
 }
