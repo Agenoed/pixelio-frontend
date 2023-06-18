@@ -7,18 +7,18 @@ import matrixIcon from "../../images/matrixIcon.png";
 export const LEDMatrixPage = () => {
   const navigate = useNavigate();
   const [matrices, setMatrices] = useState([]);
-  const { userId } = useAuth();
+  const { user } = useAuth();
   useEffect(() => {
     // Запрос к API для получения данных о матрицах пользователя
     axios
-      .get(`/api/matrices?ownerUserId=${userId}`)
+      .get(`/api/matrices?ownerUserId=${user.id}`)
       .then((response) => {
         setMatrices(response.data.list);
       })
       .catch((error) => {
         console.error("Ошибка при получении данных о матрицах:", error);
       });
-  }, [userId]);
+  }, [user.id]);
 
   const handleAddMatrix = () => {
     navigate("/add-matrix");

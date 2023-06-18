@@ -6,11 +6,11 @@ import Button from "@mui/material/Button";
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  const { userId } = useAuth();
+  const { user } = useAuth();
 
   return (
     <div className={css.wrapper}>
-      <p className={css.username}>Welcome, {userId}</p>
+      <p className={css.username}>Welcome, {user.email}</p>
       <Button
         variant="outlined"
         size="small"

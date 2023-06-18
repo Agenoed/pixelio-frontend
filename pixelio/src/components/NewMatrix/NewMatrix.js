@@ -5,7 +5,7 @@ import { useAuth } from "../../hooks/useAuth";
 export const AddMatrixPage = () => {
   const [name, setName] = useState("");
   const [publicId, setPublicId] = useState("");
-  const { userId } = useAuth();
+  const { user } = useAuth();
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
@@ -20,7 +20,7 @@ export const AddMatrixPage = () => {
     const matrixData = {
       name: name,
       publicId: publicId,
-      ownerUserId: userId,
+      ownerUserId: user.id,
     };
 
     axios

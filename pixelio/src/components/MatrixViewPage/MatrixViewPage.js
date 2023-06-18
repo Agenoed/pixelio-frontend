@@ -1,24 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import css from "./MatrixViewPage.module.css";
 import { ChromePicker } from "react-color";
 
 export const MatrixViewPage = () => {
-  const createEmptyMatrixView = () => {
-    const view = [];
-    for (let i = 0; i < 16; i++) {
-      const row = [];
-      for (let j = 0; j < 16; j++) {
-        row.push({ rgb: { r: 0, g: 0, b: 0 } });
-      }
-      view.push(row);
-    }
-    return view;
-  };
+  // const createEmptyMatrixView = () => {
+  //   const view = [];
+  //   for (let i = 0; i < 16; i++) {
+  //     const row = [];
+  //     for (let j = 0; j < 16; j++) {
+  //       row.push({ rgb: { r: 0, g: 0, b: 0 } });
+  //     }
+  //     view.push(row);
+  //   }
+  //   return view;
+  // };
   const { matrixId } = useParams();
-  const [matrixView, setMatrixView] = useState(createEmptyMatrixView());
+  const [matrixView, setMatrixView] = useState([]);
   const [selectedColor, setSelectedColor] = useState({ r: 255, g: 0, b: 0 });
+
+  useEffect(() => {
+    fetchMatrixView();
+  }, []);
+
+  const fetchMatrixView = () => {
+    axios
+      .get(`/api/matrices/${matrixId}/view`)
+      .then((response) => {
+        setMatrixView(response.data.view);
+      })
+      .catch((error) => {
+        console.error("Ошибка при получении данных матрицы:", error);
+      });
+  };
 
   const handlePixelColorChange = (x, y) => {
     const updatedView = [...matrixView];
@@ -26,13 +41,12 @@ export const MatrixViewPage = () => {
     setMatrixView(updatedView);
   };
 
-  //   const handleColorChange = (event) => {
-  //     const { name, value } = event.target;
-  //     setSelectedColor((prevState) => ({
-  //       ...prevState,
-  //       [name]: parseInt(value, 10),
-  //     }));
-  //   };
+  const handlePixelContextMenu = (event, x, y) => {
+    event.preventDefault();
+    const updatedView = [...matrixView];
+    updatedView[x][y].rgb = { r: 0, g: 0, b: 0 }; // Устанавливаем черный цвет при клике правой кнопкой мыши
+    setMatrixView(updatedView);
+  };
 
   const handleColorChange = (color) => {
     setSelectedColor(color.rgb);
@@ -66,12 +80,12 @@ export const MatrixViewPage = () => {
                   backgroundColor: `rgb(${pixel.rgb.r}, ${pixel.rgb.g}, ${pixel.rgb.b})`,
                 }}
                 onClick={() => handlePixelColorChange(x, y)}
+                onContextMenu={(event) => handlePixelContextMenu(event, x, y)}
               />
             ))}
           </div>
         ))}
       </div>
-
       <button onClick={handleApplyMatrixView}>Применить</button>
     </div>
   );
