@@ -65,7 +65,7 @@ export const MatrixViewPage = () => {
 
   return (
     <div>
-      <h1>Управление светодиодной матрицей</h1>
+      <h1>LED Matrix Control</h1>
       <div className="color-picker-container">
         <ChromePicker color={selectedColor} onChange={handleColorChange} />
       </div>
@@ -86,7 +86,7 @@ export const MatrixViewPage = () => {
           </div>
         ))}
       </div>
-      <button onClick={handleApplyMatrixView}>Применить</button>
+      <button onClick={handleApplyMatrixView}>Apply</button>
     </div>
   );
 };

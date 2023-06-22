@@ -41,20 +41,20 @@ export const LEDMatrixPage = () => {
 
   return (
     <div>
-      <h1>Светодиодные матрицы пользователя</h1>
+      <h1>User LED Matrix</h1>
       {matrices.map((matrix) => (
         <div key={matrix.id}>
           <Link to={`/matrix/${matrix.id}`}>
             <img width="150px" src={matrixIcon} alt="Матрица" />
           </Link>
-          <p>Имя: {matrix.name}</p>
+          <p>Name: {matrix.name}</p>
           <p>ID: {matrix.id}</p>
           <button onClick={() => handleDeleteMatrix(matrix.id)}>
-            Удалить матрицу
+            Delete matrix
           </button>
         </div>
       ))}
-      <button onClick={handleAddMatrix}>Добавить матрицу</button>
+      <button onClick={handleAddMatrix}>Add new matrix</button>
     </div>
   );
 };

@@ -36,19 +36,19 @@ export const AddMatrixPage = () => {
 
   return (
     <div>
-      <h1>Добавить новую матрицу</h1>
+      <h1>Add new matrix</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Имя матрицы:
+          Name matrix:
           <input type="text" value={name} onChange={handleNameChange} />
         </label>
         <br />
         <label>
-          ID матрицы:
+          ID matrix:
           <input type="text" value={publicId} onChange={handlePublicIdChange} />
         </label>
         <br />
-        <button type="submit">Добавить</button>
+        <button type="submit">Add</button>
       </form>
     </div>
   );
